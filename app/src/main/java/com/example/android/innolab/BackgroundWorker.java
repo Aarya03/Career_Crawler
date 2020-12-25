@@ -121,10 +121,12 @@ public class BackgroundWorker extends AsyncTask<String,Void,String> {
             alertDialog.setTitle("Registration Status");
         alertDialog.setMessage(result);
         alertDialog.show();
+        delegate.processFinish(result);
     }
 
     @Override
     protected void onProgressUpdate(Void... values) {
         super.onProgressUpdate(values);
     }
+    public AsyncResponse delegate=null;
 }
