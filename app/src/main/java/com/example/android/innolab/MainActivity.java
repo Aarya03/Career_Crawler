@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity implements AsyncResponse{
     EditText UsernameEt,PasswordET;
@@ -24,11 +25,15 @@ public class MainActivity extends AppCompatActivity implements AsyncResponse{
         BackgroundWorker backgroundWorker=new BackgroundWorker(this);
         backgroundWorker.delegate = this;
         backgroundWorker.execute(type,username,password);
+        UsernameEt.setText("");
+        PasswordET.setText("");
     }
     public void processFinish(String output){
         //this you will received result fired from async class of onPostExecute(result) method.
-        if(output.equals("Login Success"))
+        if(output.equals("Login Success")) {
             startActivity(new Intent(this,MainWorker.class));
+            Toast.makeText(this,"Login Success", Toast.LENGTH_SHORT).show();
+        }
     }
     public void OpenReg(View view){
         startActivity(new Intent(this,Register.class));

@@ -115,12 +115,19 @@ public class BackgroundWorker extends AsyncTask<String,Void,String> {
 
     @Override
     protected void onPostExecute(String result) {
-        if(typ.equals("login"))
+        if(typ.equals("login")){
             alertDialog.setTitle("Login Status");
-        else if(typ.equals("register"))
+            if(result.equals("Login Success"));
+            else{
+                alertDialog.setMessage(result);
+                alertDialog.show();
+            }
+        }
+        else if(typ.equals("register")) {
             alertDialog.setTitle("Registration Status");
-        alertDialog.setMessage(result);
-        alertDialog.show();
+            alertDialog.setMessage(result);
+            alertDialog.show();
+        }
         delegate.processFinish(result);
     }
 
