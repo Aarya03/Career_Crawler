@@ -14,7 +14,9 @@ public class Item {
         imgURL=IMGURL;
         ID=id;
     }
-
+    public String toString() {
+        return Name;
+    }
     public int getID() {
         return ID;
     }

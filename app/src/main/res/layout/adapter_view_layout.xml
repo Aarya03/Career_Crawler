@@ -53,10 +53,4 @@
             android:id="@+id/textView3"
             android:layout_below="@+id/textView2"/>
     </LinearLayout>
-    <Button
-        android:id="@+id/crawl"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="CRAWL"
-        />
 </LinearLayout>

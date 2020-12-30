@@ -3,6 +3,9 @@ package com.example.android.innolab;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
+import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -18,13 +21,16 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
-public class MainWorker extends AppCompatActivity {
+public class MainWorker extends AppCompatActivity implements TextWatcher {
     private static final String Item_URL="http://192.168.43.9/AndroidMysqlPHP/Main.php";
+    EditText e1;
+    itemListAdapter adapter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_worker);
-
+        e1=(EditText)findViewById(R.id.searchFilter);
+        e1.addTextChangedListener(this);
         //Populating data from database..
         loadItems();
 
@@ -48,7 +54,7 @@ public class MainWorker extends AppCompatActivity {
                             type="Not Fetched";
                         itemList.add(new Item(name,"Type Of Institution",type,drawableId,id));
                     }
-                    itemListAdapter adapter =new itemListAdapter(MainWorker.this,R.layout.adapter_view_layout,itemList);
+                    adapter =new itemListAdapter(MainWorker.this,R.layout.adapter_view_layout,itemList);
                     mListView.setAdapter(adapter);
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -61,5 +67,20 @@ public class MainWorker extends AppCompatActivity {
             }
         });
         Volley.newRequestQueue(this).add(stringRequest);
+    }
+
+    @Override
+    public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+    }
+
+    @Override
+    public void onTextChanged(CharSequence s, int start, int before, int count) {
+        this.adapter.getFilter().filter(s);
+    }
+
+    @Override
+    public void afterTextChanged(Editable s) {
+
     }
 }

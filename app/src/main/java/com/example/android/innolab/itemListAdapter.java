@@ -7,7 +7,10 @@ import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ArrayAdapter;
+import android.widget.BaseAdapter;
 import android.widget.Button;
+import android.widget.Filter;
+import android.widget.Filterable;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -26,11 +29,23 @@ import com.nostra13.universalimageloader.core.display.FadeInBitmapDisplayer;
 import java.util.ArrayList;
 import java.util.List;
 
-public class itemListAdapter extends ArrayAdapter<Item> {
+public class itemListAdapter extends BaseAdapter implements Filterable {
     private static final String TAG="ItemListAdapter";
+    ArrayList<Item> items;
+    CustomFilter filter;
+    ArrayList<Item> filterList;
     private Context mContext;
     private int mResource;
     private int lastPosition=-1;
+
+    @Override
+    public Filter getFilter() {
+        if(filter==null){
+            filter=new CustomFilter();
+        }
+        return filter;
+    }
+
     static class ViewHolder {
         TextView name;
         TextView birthday;
@@ -40,19 +55,35 @@ public class itemListAdapter extends ArrayAdapter<Item> {
     }
 
     public itemListAdapter(Context context, int resource, @NonNull ArrayList<Item> objects) {
-        super(context, resource, objects);
+        this.items=objects;
+        this.filterList=objects;
         mContext=context;
         mResource=resource;
+    }
+
+    @Override
+    public int getCount() {
+        return items.size();
+    }
+
+    @Override
+    public Object getItem(int position) {
+        return items.get(position);
+    }
+
+    @Override
+    public long getItemId(int position) {
+        return items.indexOf(getItem(position));
     }
 
     @NonNull
     @Override
     public View getView(final int position, @Nullable View convertView, @NonNull ViewGroup parent) {
         //get the items information
-        String name=getItem(position).getName();
-        String birthday=getItem(position).getBirthday();
-        String sex=getItem(position).getSex();
-        int imgID=getItem(position).getImgURL();
+        String name=items.get(position).getName();
+        String birthday=items.get(position).getBirthday();
+        String sex=items.get(position).getSex();
+        int imgID=items.get(position).getImgURL();
 
         final View result;
         ViewHolder holder;
@@ -65,13 +96,6 @@ public class itemListAdapter extends ArrayAdapter<Item> {
             holder.birthday = (TextView) convertView.findViewById(R.id.textView2);
             holder.sex = (TextView) convertView.findViewById(R.id.textView3);
             holder.img=(ImageView)convertView.findViewById(R.id.image);
-            holder.button=(Button)convertView.findViewById(R.id.crawl);
-            holder.button.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Toast.makeText(getContext(),"Button was clicked for list item "+position,Toast.LENGTH_SHORT).show();
-                }
-            });
             result=convertView;
             convertView.setTag(holder);
         }
@@ -92,5 +116,35 @@ public class itemListAdapter extends ArrayAdapter<Item> {
 
         return convertView;
 
+    }
+    class CustomFilter extends Filter{
+
+        @Override
+        protected FilterResults performFiltering(CharSequence constraint) {
+            FilterResults results=new FilterResults();
+            if(constraint!=null&&constraint.length()>0){
+                constraint=constraint.toString().toUpperCase();
+                ArrayList<Item> filters=new ArrayList<>();
+                for(int i=0;i<filterList.size();i++){
+                    if(filterList.get(i).getName().toUpperCase().contains(constraint)){
+                        Item item=new Item(filterList.get(i).getName(),filterList.get(i).getBirthday(),filterList.get(i).getSex(),filterList.get(i).getImgURL(),filterList.get(i).getID());
+                        filters.add(item);
+                    }
+                }
+                results.count=filters.size();
+                results.values=filters;
+            }
+            else{
+                results.count=filterList.size();
+                results.values=filterList;
+            }
+            return results;
+        }
+
+        @Override
+        protected void publishResults(CharSequence constraint, FilterResults results) {
+            items=(ArrayList<Item>)results.values;
+            notifyDataSetChanged();
+        }
     }
 }
