@@ -2,9 +2,12 @@ package com.example.android.innolab;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
@@ -52,10 +55,22 @@ public class MainWorker extends AppCompatActivity implements TextWatcher {
                         int drawableId = getResources().getIdentifier("x"+id, "drawable", getPackageName());
                         if(type.equals("null"))
                             type="Not Fetched";
-                        itemList.add(new Item(name,"Type Of Institution",type,drawableId,id));
+                        if(drawableId!=0)
+                            itemList.add(new Item(name,"Type Of Institution",type,drawableId,id));
+                        else
+                            itemList.add(new Item(name,"Type Of Institution",type,R.drawable.err,id));
                     }
                     adapter =new itemListAdapter(MainWorker.this,R.layout.adapter_view_layout,itemList);
                     mListView.setAdapter(adapter);
+                    mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                        @Override
+                        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                            Item item= (Item) parent.getItemAtPosition(position);
+                            Intent intent=new Intent(getApplicationContext(),CrawlActivity.class);
+                            intent.putExtra("id",item.getID());
+                            startActivity(intent);
+                        }
+                    });
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
