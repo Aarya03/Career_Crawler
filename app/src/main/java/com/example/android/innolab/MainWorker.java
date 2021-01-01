@@ -68,6 +68,7 @@ public class MainWorker extends AppCompatActivity implements TextWatcher {
                             Item item= (Item) parent.getItemAtPosition(position);
                             Intent intent=new Intent(getApplicationContext(),CrawlActivity.class);
                             intent.putExtra("id",item.getID());
+                            intent.putExtra("name",item.getName());
                             startActivity(intent);
                         }
                     });

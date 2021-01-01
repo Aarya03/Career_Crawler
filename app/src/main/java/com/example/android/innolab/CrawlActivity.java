@@ -12,7 +12,7 @@ import android.widget.Toast;
 
 public class CrawlActivity extends AppCompatActivity {
     int id;
-    Button but;
+    String name;
     TextView textView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -20,13 +20,12 @@ public class CrawlActivity extends AppCompatActivity {
         setContentView(R.layout.activity_crawl);
         Intent intent=getIntent();
         id=intent.getIntExtra("id",0);
+        name=intent.getStringExtra("name");
         textView=(TextView)findViewById(R.id.text1);
-        but=(Button)findViewById(R.id.but);
-        but.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                textView.setText(String.valueOf(id));
-            }
-        });
+    }
+    public void onCrawl(View view) {
+        CrawlWorker crawlWorker=new CrawlWorker(this,this);
+        crawlWorker.execute(String.valueOf(id));
+        textView.setText("Crawling For "+name);
     }
 }
