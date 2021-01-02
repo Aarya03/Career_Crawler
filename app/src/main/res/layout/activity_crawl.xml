@@ -6,31 +6,42 @@
     android:layout_height="wrap_content"
     android:orientation="vertical"
     tools:context=".CrawlActivity">
-    <TextView
+    <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="16dp"
-        android:textSize="24sp"
-        android:textStyle="bold"
-        android:scrollbars = "vertical"
-        android:text="RESULT" />
-    <TextView
-        android:id="@+id/text1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="16dp"
-        android:textSize="24sp"
-        android:enabled="true"
-        android:textIsSelectable="true"
-        android:focusable="true"
-        android:longClickable="true"
-        android:scrollbars = "vertical"/>
+        android:orientation="horizontal">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:scrollbars="vertical"
+            android:text="STATUS:"
+            android:textSize="24sp"
+            android:textStyle="bold" />
+        <TextView
+            android:id="@+id/text1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:textSize="24sp"
+            android:enabled="true"
+            android:textIsSelectable="true"
+            android:focusable="true"
+            android:longClickable="true"
+            android:scrollbars = "vertical"/>
+    </LinearLayout>
+
     <Button
         android:id="@+id/but"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="16dp"
+        android:layout_margin="8dp"
         android:textSize="24sp"
         android:text="CRAWL"
         android:onClick="onCrawl"/>
+    <ListView
+        android:id="@+id/listView1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        />
 </LinearLayout>

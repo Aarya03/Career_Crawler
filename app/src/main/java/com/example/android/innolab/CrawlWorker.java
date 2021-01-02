@@ -9,6 +9,8 @@ import android.text.ClipboardManager;
 import android.text.method.ScrollingMovementMethod;
 import android.util.Log;
 import android.view.View;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -24,10 +26,12 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLEncoder;
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.Set;
 
 public class CrawlWorker extends AsyncTask<String,Void,String> {
     private Context context;
-    private AlertDialog alertDialog;
     private WeakReference mWeakActivity;
     CrawlWorker(Context ctx, Activity activity){
         context =ctx;
@@ -72,8 +76,6 @@ public class CrawlWorker extends AsyncTask<String,Void,String> {
 
     @Override
     protected void onPreExecute() {
-        alertDialog=new AlertDialog.Builder(context).create();
-
     }
 
     @Override
@@ -83,36 +85,38 @@ public class CrawlWorker extends AsyncTask<String,Void,String> {
         textView=activity.findViewById(R.id.text1);
         textView.setMovementMethod(new ScrollingMovementMethod());
         String fresult=getRes(result);
-        textView.setText(fresult);
-        textView.setOnClickListener(new View.OnClickListener() { // set onclick listener to my textview
-            @Override
-            public void onClick(View view) {
-                ClipboardManager cm = (ClipboardManager)context.getSystemService(Context.CLIPBOARD_SERVICE);
-                cm.setText(textView.getText().toString());
-                Toast.makeText(context, "Copied :)", Toast.LENGTH_SHORT).show();
-            }
-        });
-        alertDialog.setTitle("Crawl Status");
-        alertDialog.setMessage(result);
-//        alertDialog.show();
+        String[] lines = fresult.split("\\r?\\n");
+        Set<String> hash_Set
+                = new HashSet<String>();
+        for(int i=0;i<lines.length;i++){
+            hash_Set.add(lines[i]);
+        }
+        String[] ret=new String[hash_Set.size()];
+        Iterator<String> it = hash_Set.iterator();
+        int idx=0;
+        while(it.hasNext()){
+            ret[idx++]=it.next();
+        }
+        ArrayAdapter<String> itemsAdapter =
+                new ArrayAdapter<String>(context, android.R.layout.simple_list_item_1,ret);
+        ListView listView1=activity.findViewById(R.id.listView1);
+        listView1.setAdapter(itemsAdapter);
+        textView.setText("Crawled");
     }
     private String getRes(String in){
-        in=" "+in;
+        in="#"+in;
         String out="";
-        int c=1;
         for(int i=0;i<in.length()-1;i++){
-            if(in.charAt(i)==' ') {
-                if(c>1){
-                    out+='\n';
-                    i+=3;
-                }
-                out=out+String.valueOf(c++)+". ";
-                if(c>2&&c%2==0)
-                    out=out+"htt";
+            if(in.charAt(i)=='<')
+                break;
+            if(in.charAt(i)=='#'){
+                if(i==0)
+                    out=out;
+                else
+                    out=out+'\n';
             }
-            else{
+            else
                 out=out+in.charAt(i);
-            }
         }
         return out;
     }
