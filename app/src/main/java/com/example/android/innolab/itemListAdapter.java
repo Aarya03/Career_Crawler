@@ -31,9 +31,9 @@ import java.util.List;
 
 public class itemListAdapter extends BaseAdapter implements Filterable {
     private static final String TAG="ItemListAdapter";
-    ArrayList<Item> items;
-    CustomFilter filter;
-    ArrayList<Item> filterList;
+    private ArrayList<Item> items;
+    private CustomFilter filter;
+    private ArrayList<Item> filterList;
     private Context mContext;
     private int mResource;
     private int lastPosition=-1;
@@ -82,7 +82,7 @@ public class itemListAdapter extends BaseAdapter implements Filterable {
         //get the items information
         String name=items.get(position).getName();
         String birthday=items.get(position).getBirthday();
-        String sex=items.get(position).getSex();
+        String sex=items.get(position).getTyp();
         int imgID=items.get(position).getImgURL();
 
         final View result;
@@ -127,7 +127,7 @@ public class itemListAdapter extends BaseAdapter implements Filterable {
                 ArrayList<Item> filters=new ArrayList<>();
                 for(int i=0;i<filterList.size();i++){
                     if(filterList.get(i).getName().toUpperCase().contains(constraint)){
-                        Item item=new Item(filterList.get(i).getName(),filterList.get(i).getBirthday(),filterList.get(i).getSex(),filterList.get(i).getImgURL(),filterList.get(i).getID(),filterList.get(i).getHomePage());
+                        Item item=new Item(filterList.get(i).getName(),filterList.get(i).getBirthday(),filterList.get(i).getTyp(),filterList.get(i).getImgURL(),filterList.get(i).getID(),filterList.get(i).getHomePage());
                         filters.add(item);
                     }
                 }

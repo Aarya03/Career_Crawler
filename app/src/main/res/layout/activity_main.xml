@@ -8,13 +8,13 @@
     tools:context=".MainActivity">
     <ImageView
         android:id="@+id/app_logo"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:layout_marginTop="8dp"
         android:layout_marginStart="32dp"
         android:layout_marginEnd="32dp"
-        android:src="@drawable/atom"
-        android:layout_gravity="center"
-        app:layout_constraintVertical_chainStyle="packed" />
+        android:src="@drawable/career"
+        android:layout_gravity="center" />
     <TextView
         android:id="@+id/login_label"
         android:layout_width="match_parent"
@@ -31,9 +31,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
-        android:layout_marginTop="36dp"
+        android:layout_marginTop="32dp"
         android:layout_marginEnd="32dp"
-        android:text="Username / Email"
+        android:text="Username"
         android:textColor="@android:color/black"
         android:textSize="16sp"
         android:textStyle="bold" />
@@ -77,7 +77,7 @@
         android:layout_marginStart="32dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="32dp"
-        android:background="@drawable/button_bg"
+        android:background="@android:color/holo_blue_dark"
         android:stateListAnimator="@null"
         android:text="Sign In"
         android:textAllCaps="false"

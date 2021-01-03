@@ -1,5 +1,6 @@
 package com.example.android.innolab;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
@@ -31,6 +32,7 @@ import java.util.Iterator;
 import java.util.Set;
 
 public class CrawlWorker extends AsyncTask<String,Void,String> {
+    @SuppressLint("StaticFieldLeak")
     private Context context;
     private WeakReference mWeakActivity;
     CrawlWorker(Context ctx, Activity activity){
@@ -81,9 +83,6 @@ public class CrawlWorker extends AsyncTask<String,Void,String> {
     @Override
     protected void onPostExecute(String result) {
         Activity activity = (Activity) mWeakActivity.get();
-        final TextView textView;
-        textView=activity.findViewById(R.id.text1);
-        textView.setMovementMethod(new ScrollingMovementMethod());
         String fresult=getRes(result);
         String[] lines = fresult.split("\\r?\\n");
         Set<String> hash_Set
@@ -98,10 +97,9 @@ public class CrawlWorker extends AsyncTask<String,Void,String> {
             ret[idx++]=it.next();
         }
         ArrayAdapter<String> itemsAdapter =
-                new ArrayAdapter<String>(context, android.R.layout.simple_list_item_1,ret);
+                new ArrayAdapter<String>(context, R.layout.career_item,ret);
         ListView listView1=activity.findViewById(R.id.listView1);
         listView1.setAdapter(itemsAdapter);
-        textView.setText("Crawled");
     }
     private String getRes(String in){
         in="#"+in;

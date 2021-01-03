@@ -1,5 +1,6 @@
 package com.example.android.innolab;
 
+import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
@@ -19,9 +20,10 @@ import java.net.URL;
 import java.net.URLEncoder;
 
 public class BackgroundWorker extends AsyncTask<String,Void,String> {
-    Context context;
-    String typ="";
-    AlertDialog alertDialog;
+    @SuppressLint("StaticFieldLeak")
+    private Context context;
+    private String typ="";
+    private AlertDialog alertDialog;
     BackgroundWorker(Context ctx){
         context =ctx;
     }
@@ -123,12 +125,17 @@ public class BackgroundWorker extends AsyncTask<String,Void,String> {
                 alertDialog.show();
             }
         }
-        else if(typ.equals("register")) {
-            alertDialog.setTitle("Registration Status");
-            if(result=="")
-                alertDialog.setMessage("Registration Failed");
-            else alertDialog.setMessage(result);
-            alertDialog.show();
+        if(typ.equals("register")) {
+            alertDialog.setTitle("Error!");
+            if(result.equals("Error1")) {
+                alertDialog.setMessage("Fields cannot be empty");
+                alertDialog.show();
+            }
+            else if(result.equals("Insert Successful"));
+            else {
+                alertDialog.setMessage("Try a different username");
+                alertDialog.show();
+            }
         }
         delegate.processFinish(result);
     }

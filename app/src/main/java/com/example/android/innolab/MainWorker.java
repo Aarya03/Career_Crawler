@@ -30,6 +30,7 @@ public class MainWorker extends AppCompatActivity implements TextWatcher {
     itemListAdapter adapter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        setTitle("Institutes Near Your Location");
         assert getSupportActionBar() != null;   //null check
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);   //show back button
         super.onCreate(savedInstanceState);
@@ -76,7 +77,7 @@ public class MainWorker extends AppCompatActivity implements TextWatcher {
                             Intent intent=new Intent(getApplicationContext(),CrawlActivity.class);
                             intent.putExtra("id",item.getID());
                             intent.putExtra("name",item.getName());
-                            intent.putExtra("home_pahe",item.getHomePage());
+                            intent.putExtra("home_page",item.getHomePage());
                             startActivity(intent);
                         }
                     });

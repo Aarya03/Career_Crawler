@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
+    android:background="@drawable/activity_back"
     tools:context=".CrawlActivity">
     <ImageView
         android:id="@+id/insti_logo"
@@ -26,36 +27,31 @@
         android:text="Name"
         android:textColor="@android:color/black"
         android:textSize="20sp" />
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="8dp"
-            android:scrollbars="vertical"
-            android:text="STATUS:"
-            android:textSize="24sp"
-            android:textStyle="bold" />
-        <TextView
-            android:id="@+id/text1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="8dp"
-            android:textSize="24sp"
-            android:text="Idle"
-            android:scrollbars = "vertical"/>
-    </LinearLayout>
-
     <Button
-        android:id="@+id/but"
-        android:layout_width="wrap_content"
+        android:id="@+id/btnLogin"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="8dp"
-        android:textSize="24sp"
-        android:text="CRAWL"
-        android:onClick="onCrawl"/>
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="32dp"
+        android:background="@android:color/holo_blue_dark"
+        android:stateListAnimator="@null"
+        android:text="Open Home Page"
+        android:textAllCaps="false"
+        android:textColor="@android:color/white"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:onClick="onHomy"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="32dp"
+        android:textStyle="bold"
+        android:text="Career Realted Links"
+        android:textColor="@android:color/holo_blue_dark"
+        android:textSize="20sp" />
     <ListView
         android:id="@+id/listView1"
         android:layout_width="match_parent"

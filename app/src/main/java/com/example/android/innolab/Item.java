@@ -3,15 +3,15 @@ package com.example.android.innolab;
 public class Item {
     private String Name;
     private String Birthday;
-    private String Sex;
+    private String typ;
     private int imgURL;
     private int ID;
     private String homePage;
 
-    public Item(String name, String birthday, String sex, int IMGURL,int id,String home_page) {
+    public Item(String name, String birthday, String TYP, int IMGURL,int id,String home_page) {
         Name = name;
         Birthday = birthday;
-        Sex = sex;
+        typ = TYP;
         imgURL=IMGURL;
         ID=id;
         homePage=home_page;
@@ -60,11 +60,11 @@ public class Item {
         this.Birthday = birthday;
     }
 
-    public String getSex() {
-        return Sex;
+    public String getTyp() {
+        return typ;
     }
 
-    public void setSex(String sex) {
-        this.Sex = sex;
+    public void setTyp(String TYP) {
+        this.typ = TYP;
     }
 }
