@@ -30,6 +30,8 @@ public class MainWorker extends AppCompatActivity implements TextWatcher {
     itemListAdapter adapter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        assert getSupportActionBar() != null;   //null check
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);   //show back button
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_worker);
         e1=(EditText)findViewById(R.id.searchFilter);
@@ -37,6 +39,11 @@ public class MainWorker extends AppCompatActivity implements TextWatcher {
         //Populating data from database..
         loadItems();
 
+    }
+    @Override
+    public boolean onSupportNavigateUp() {
+        finish();
+        return true;
     }
     private void loadItems(){
         final ListView mListView=(ListView)findViewById(R.id.list_view);
@@ -56,9 +63,9 @@ public class MainWorker extends AppCompatActivity implements TextWatcher {
                         if(type.equals("null"))
                             type="Not Fetched";
                         if(drawableId!=0)
-                            itemList.add(new Item(name,"Type Of Institution",type,drawableId,id));
+                            itemList.add(new Item(name,"Type Of Institution",type,drawableId,id,home_page));
                         else
-                            itemList.add(new Item(name,"Type Of Institution",type,R.drawable.err,id));
+                            itemList.add(new Item(name,"Type Of Institution",type,R.drawable.err,id,home_page));
                     }
                     adapter =new itemListAdapter(MainWorker.this,R.layout.adapter_view_layout,itemList);
                     mListView.setAdapter(adapter);
@@ -69,6 +76,7 @@ public class MainWorker extends AppCompatActivity implements TextWatcher {
                             Intent intent=new Intent(getApplicationContext(),CrawlActivity.class);
                             intent.putExtra("id",item.getID());
                             intent.putExtra("name",item.getName());
+                            intent.putExtra("home_pahe",item.getHomePage());
                             startActivity(intent);
                         }
                     });

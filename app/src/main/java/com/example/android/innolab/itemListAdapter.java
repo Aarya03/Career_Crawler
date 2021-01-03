@@ -127,7 +127,7 @@ public class itemListAdapter extends BaseAdapter implements Filterable {
                 ArrayList<Item> filters=new ArrayList<>();
                 for(int i=0;i<filterList.size();i++){
                     if(filterList.get(i).getName().toUpperCase().contains(constraint)){
-                        Item item=new Item(filterList.get(i).getName(),filterList.get(i).getBirthday(),filterList.get(i).getSex(),filterList.get(i).getImgURL(),filterList.get(i).getID());
+                        Item item=new Item(filterList.get(i).getName(),filterList.get(i).getBirthday(),filterList.get(i).getSex(),filterList.get(i).getImgURL(),filterList.get(i).getID(),filterList.get(i).getHomePage());
                         filters.add(item);
                     }
                 }

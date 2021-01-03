@@ -125,7 +125,9 @@ public class BackgroundWorker extends AsyncTask<String,Void,String> {
         }
         else if(typ.equals("register")) {
             alertDialog.setTitle("Registration Status");
-            alertDialog.setMessage(result);
+            if(result=="")
+                alertDialog.setMessage("Registration Failed");
+            else alertDialog.setMessage(result);
             alertDialog.show();
         }
         delegate.processFinish(result);

@@ -10,6 +10,8 @@ public class Register extends AppCompatActivity {
     EditText name,surname,age,username,password;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        assert getSupportActionBar() != null;   //null check
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);   //show back button
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
         name=(EditText)findViewById((R.id.etFirstname));
@@ -29,5 +31,9 @@ public class Register extends AppCompatActivity {
         BackgroundWorker backgroundWorker=new BackgroundWorker(this);
         backgroundWorker.execute(type,str_name,str_surname,str_age,str_username,str_password);
     }
-
+    @Override
+    public boolean onSupportNavigateUp() {
+        finish();
+        return true;
+    }
 }
