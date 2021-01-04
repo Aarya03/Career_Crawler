@@ -46,6 +46,7 @@ public class Register extends AppCompatActivity implements AsyncResponse{
         if(output.equals("Insert Successful")) {
             startActivity(new Intent(this,MainActivity.class));
             Toast.makeText(this,"Registration Success", Toast.LENGTH_SHORT).show();
+            finish();
         }
     }
 }
