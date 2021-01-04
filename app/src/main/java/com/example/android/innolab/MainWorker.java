@@ -2,6 +2,7 @@ package com.example.android.innolab;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
@@ -17,6 +18,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.android.innolab.utils.PreferenceUtils;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -107,5 +109,11 @@ public class MainWorker extends AppCompatActivity implements TextWatcher {
     @Override
     public void afterTextChanged(Editable s) {
 
+    }
+    public void onLogout(View view){
+        PreferenceUtils.saveEmail(null,this);
+        PreferenceUtils.savePassword(null,this);
+        startActivity(new Intent(this,MainActivity.class));
+        finish();
     }
 }

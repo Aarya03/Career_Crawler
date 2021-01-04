@@ -7,6 +7,8 @@ import android.content.Intent;
 import android.os.AsyncTask;
 import android.util.Log;
 
+import com.example.android.innolab.utils.PreferenceUtils;
+
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.IOException;
@@ -24,6 +26,8 @@ public class BackgroundWorker extends AsyncTask<String,Void,String> {
     private Context context;
     private String typ="";
     private AlertDialog alertDialog;
+    private String gUserName;
+    private String gPassword;
     BackgroundWorker(Context ctx){
         context =ctx;
     }
@@ -37,6 +41,8 @@ public class BackgroundWorker extends AsyncTask<String,Void,String> {
             try {
                 String user_name = params[1];
                 String password = params[2];
+                gUserName=user_name;
+                gPassword=password;
                 URL url = new URL(login_url);
                 HttpURLConnection httpURLConnection = (HttpURLConnection)url.openConnection();
                 httpURLConnection.setRequestMethod("POST");
@@ -119,7 +125,10 @@ public class BackgroundWorker extends AsyncTask<String,Void,String> {
     protected void onPostExecute(String result) {
         if(typ.equals("login")){
             alertDialog.setTitle("Login Status");
-            if(result.equals("Login Success"));
+            if(result.equals("Login Success")){
+                PreferenceUtils.saveEmail(gUserName,context);
+                PreferenceUtils.savePassword(gPassword,context);
+            }
             else{
                 alertDialog.setMessage(result);
                 alertDialog.show();

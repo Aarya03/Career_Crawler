@@ -8,6 +8,8 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.example.android.innolab.utils.PreferenceUtils;
+
 public class MainActivity extends AppCompatActivity implements AsyncResponse{
     EditText UsernameEt,PasswordET;
     @Override
@@ -16,7 +18,10 @@ public class MainActivity extends AppCompatActivity implements AsyncResponse{
         setContentView(R.layout.activity_main);
         UsernameEt=(EditText)findViewById(R.id.etUsername);
         PasswordET=(EditText)findViewById(R.id.etPassword);
-
+        if(PreferenceUtils.getEmail(this)!=null){
+            startActivity(new Intent(this,MainWorker.class));
+            finish();
+        }
     }
     public void OnLogin(View view) {
         String username=UsernameEt.getText().toString();
@@ -27,12 +32,14 @@ public class MainActivity extends AppCompatActivity implements AsyncResponse{
         backgroundWorker.execute(type,username,password);
         UsernameEt.setText("");
         PasswordET.setText("");
+
     }
     public void processFinish(String output){
         //this you will received result fired from async class of onPostExecute(result) method.
         if(output.equals("Login Success")) {
             startActivity(new Intent(this,MainWorker.class));
             Toast.makeText(this,"Login Success", Toast.LENGTH_SHORT).show();
+            finish();
         }
     }
     public void OpenReg(View view){
