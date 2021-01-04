@@ -20,6 +20,7 @@ public class MainActivity extends AppCompatActivity implements AsyncResponse{
         PasswordET=(EditText)findViewById(R.id.etPassword);
         if(PreferenceUtils.getEmail(this)!=null){
             startActivity(new Intent(this,MainWorker.class));
+            Toast.makeText(this,"Welcome Back!", Toast.LENGTH_SHORT).show();
             finish();
         }
     }
@@ -38,7 +39,7 @@ public class MainActivity extends AppCompatActivity implements AsyncResponse{
         //this you will received result fired from async class of onPostExecute(result) method.
         if(output.equals("Login Success")) {
             startActivity(new Intent(this,MainWorker.class));
-            Toast.makeText(this,"Login Success", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this,"Login Success!", Toast.LENGTH_SHORT).show();
             finish();
         }
     }
