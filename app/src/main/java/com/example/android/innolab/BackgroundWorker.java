@@ -124,7 +124,7 @@ public class BackgroundWorker extends AsyncTask<String,Void,String> {
     @Override
     protected void onPostExecute(String result) {
         if(typ.equals("login")){
-            alertDialog.setTitle("Login Status");
+            alertDialog.setTitle("Alert!");
             if(result.equals("Login Success")){
                 PreferenceUtils.saveEmail(gUserName,context);
                 PreferenceUtils.savePassword(gPassword,context);

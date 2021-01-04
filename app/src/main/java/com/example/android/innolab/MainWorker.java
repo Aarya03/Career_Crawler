@@ -1,8 +1,10 @@
 package com.example.android.innolab;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
@@ -64,7 +66,7 @@ public class MainWorker extends AppCompatActivity implements TextWatcher {
                         String type=itemObject.getString("type");
                         int drawableId = getResources().getIdentifier("x"+id, "drawable", getPackageName());
                         if(type.equals("null"))
-                            type="Not Fetched";
+                            type="University";
                         if(drawableId!=0)
                             itemList.add(new Item(name,"Type Of Institution",type,drawableId,id,home_page));
                         else
@@ -111,9 +113,33 @@ public class MainWorker extends AppCompatActivity implements TextWatcher {
 
     }
     public void onLogout(View view){
+//        PreferenceUtils.saveEmail(null,this);
+//        PreferenceUtils.savePassword(null,this);
+//        startActivity(new Intent(this,MainActivity.class));
+//        finish();
+        showPopup();
+    }
+    // first step helper function
+    private void showPopup() {
+        AlertDialog.Builder alert = new AlertDialog.Builder(this);
+        alert.setMessage("Are you sure?")
+                .setPositiveButton("Logout", new DialogInterface.OnClickListener()                 {
+
+                    public void onClick(DialogInterface dialog, int which) {
+
+                        logout(); // Last step. Logout function
+
+                    }
+                }).setNegativeButton("Cancel", null);
+
+        AlertDialog alert1 = alert.create();
+        alert1.show();
+    }
+
+    private void logout() {
         PreferenceUtils.saveEmail(null,this);
         PreferenceUtils.savePassword(null,this);
-        startActivity(new Intent(this,MainActivity.class));
+        startActivity(new Intent(this, MainActivity.class));
         finish();
     }
 }
