@@ -140,6 +140,10 @@ public class BackgroundWorker extends AsyncTask<String,Void,String> {
                 alertDialog.setMessage("Fields cannot be empty");
                 alertDialog.show();
             }
+            else if(result.equals("Error2")){
+                alertDialog.setMessage("Password must be at least 8 characters");
+                alertDialog.show();
+            }
             else if(result.equals("Insert Successful"));
             else {
                 alertDialog.setMessage("Try a different username");
