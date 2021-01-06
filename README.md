@@ -28,5 +28,5 @@ WE AIM TO FIND SUCH OBSCURE INSTITUTES TO PRESENT MORE JOB PROSPECTS AND SUITABL
 </p>
 
 # App Backend
-PHP is used for macking a connection to the database
+PHP is used for macking a connection to the database.</br>
 Python Scripts are used to crawl the web and insert data into the database.
