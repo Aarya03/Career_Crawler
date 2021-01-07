@@ -1,6 +1,6 @@
 # Single-threaded Web Crawler
 
-<b>(Back-end part) -</b> The back-end code is part of https://github.com/saumya-prakash/SIngle-threaded-web-crawler 
+<b>(Back-end part) -</b> The back-end code is part of https://github.com/saumya-prakash/Single-threaded-web-crawler
 
 
 <h4>sample crawling results</h4>
