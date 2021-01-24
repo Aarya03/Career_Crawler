@@ -1,8 +1,0 @@
-__pycache__
-*.log
-geckodriver.log
-last.png
-.idea
-
-db_utilities.py
-tables.sql
