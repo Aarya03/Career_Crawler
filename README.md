@@ -7,26 +7,31 @@ Most of the job related sites or even search engines don’t put them in their t
 WE AIM TO FIND SUCH OBSCURE INSTITUTES TO PRESENT MORE JOB PROSPECTS AND SUITABLE CANDIDATES TO THE UNEMPLOYED AND THE INSTITUTES RESPECTIVELY.</br>
 
 # User Interface
-<b>Login Activity</b>
-<p align="center">
-  <img src="UI/MainActivity.png" width="350" title="Login Activity">
 </p>
-
-<b>Register Activity</b>
-<p align="center">
-  <img src="UI/Register.png" width="350" title="Register Activity">
-</p>
-
-<b>ItemList Activity</b>
-<p align="center">
-  <img src="UI/ItemList.png" width="350" title="ItemList Activity">
-</p>
-
-<b>ItemDetails Activity</b>
-<p align="center">
-  <img src="UI/ItemDetails.png" width="350" title="ItemDetails Activity">
-</p>
+<table>
+  <tr>
+    <td>Login Activity - The user can Login here</td>
+    <td>Register Activity - For new user sign up</td>
+  </tr>
+  <tr>
+    <td><img src="UI/MainActivity.png" width=350></td>
+    <td><img src="UI/Register.png" width=350></td>
+  </tr>
+ </table>
+<table>
+  <tr>
+    <td>ItemList Activity - For displaying various college in the desired radius</td>
+    <td>ItemDetails Activity - For displayin the career related details of the chosen institution</td>
+  </tr>
+  <tr>
+    <td><img src="UI/ItemList.png" width=350></td>
+    <td><img src="UI/ItemDetails.png" width=350></td>
+  </tr>
+ </table>
 
 # App Backend
-PHP is used for macking a connection to the database.</br>
-Python Scripts are used to crawl the web and insert data into the database.
+
+<ul>
+<li>PHP and MySQL queries are used for macking a connection to the database.</li>
+<li>Python Scripts are used to crawl the web(Google Maps for obtaining the list of institutions in the chosen radius) and insert data into the database.</li>
+</ul>
