@@ -20,8 +20,8 @@ WE AIM TO FIND SUCH OBSCURE INSTITUTES TO PRESENT MORE JOB PROSPECTS AND SUITABL
  </table>
 <table>
   <tr>
-    <td>ItemList Activity - For displaying various college in the desired radius</td>
-    <td>ItemDetails Activity - For displayin the career related details of the chosen institution</td>
+    <td>ItemList Activity - For displaying various institutions in the desired radius</td>
+    <td>ItemDetails Activity - For displaying the career related details of the chosen institution</td>
   </tr>
   <tr>
     <td><img src="UI/ItemList.png" width=350></td>
